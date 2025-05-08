@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Lista de Prontuários</h2>
+    <button class="btn btn-primary" routerLink="/prontuarios/novo">Novo Prontuário</button>
+  </div>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Paciente</th>
+            <th>Data da Consulta</th>
+            <th>Médico</th>
+            <th>Diagnóstico</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prontuario of prontuarios">
+            <td>{{ prontuario.paciente.nome }}</td>
+            <td>{{ prontuario.dataConsulta | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ prontuario.nomeMedico }} (CRM: {{ prontuario.crmMedico }})</td>
+            <td>{{ prontuario.diagnostico }}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-primary" [routerLink]="['/prontuarios', prontuario.id]">
+                  Editar
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteProntuario(prontuario.id!)">
+                  Excluir
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> 
