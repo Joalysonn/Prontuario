@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>{{ isEdit ? 'Editar' : 'Novo' }} Paciente</h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nome" formControlName="nome">
+              <div class="invalid-feedback" *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched">
+                Nome é obrigatório
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="cpf" class="form-label">CPF</label>
+              <input type="text" class="form-control" id="cpf" formControlName="cpf">
+              <div class="invalid-feedback" *ngIf="form.get('cpf')?.invalid && form.get('cpf')?.touched">
+                CPF deve conter 11 dígitos
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+              <input type="date" class="form-control" id="dataNascimento" formControlName="dataNascimento">
+              <div class="invalid-feedback" *ngIf="form.get('dataNascimento')?.invalid && form.get('dataNascimento')?.touched">
+                Data de nascimento é obrigatória
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="telefone" class="form-label">Telefone</label>
+              <input type="text" class="form-control" id="telefone" formControlName="telefone">
+              <div class="invalid-feedback" *ngIf="form.get('telefone')?.invalid && form.get('telefone')?.touched">
+                Telefone é obrigatório
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email">
+              <div class="invalid-feedback" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+                Email inválido
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="endereco" class="form-label">Endereço</label>
+              <input type="text" class="form-control" id="endereco" formControlName="endereco">
+              <div class="invalid-feedback" *ngIf="form.get('endereco')?.invalid && form.get('endereco')?.touched">
+                Endereço é obrigatório
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" routerLink="/pacientes">Cancelar</button>
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></span>
+                {{ isEdit ? 'Salvar' : 'Criar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

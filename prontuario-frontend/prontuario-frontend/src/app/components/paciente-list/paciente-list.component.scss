@@ -1,0 +1,23 @@
+.table {
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  
+  th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+  }
+  
+  td {
+    vertical-align: middle;
+  }
+}
+
+.btn-group {
+  .btn {
+    margin-right: 0.5rem;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+} 

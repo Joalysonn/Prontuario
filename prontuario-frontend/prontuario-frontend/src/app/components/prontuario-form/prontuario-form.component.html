@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>{{ isEdit ? 'Editar' : 'Novo' }} Prontuário</h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="paciente" class="form-label">Paciente</label>
+              <select class="form-control" id="paciente" formControlName="paciente">
+                <option value="">Selecione um paciente</option>
+                <option *ngFor="let paciente of pacientes" [value]="paciente.id">
+                  {{ paciente.nome }} (CPF: {{ paciente.cpf }})
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="form.get('paciente')?.invalid && form.get('paciente')?.touched">
+                Paciente é obrigatório
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="dataConsulta" class="form-label">Data da Consulta</label>
+              <input type="datetime-local" class="form-control" id="dataConsulta" formControlName="dataConsulta">
+              <div class="invalid-feedback" *ngIf="form.get('dataConsulta')?.invalid && form.get('dataConsulta')?.touched">
+                Data da consulta é obrigatória
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="sintomas" class="form-label">Sintomas</label>
+              <textarea class="form-control" id="sintomas" formControlName="sintomas" rows="3"></textarea>
+              <div class="invalid-feedback" *ngIf="form.get('sintomas')?.invalid && form.get('sintomas')?.touched">
+                Sintomas são obrigatórios
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="diagnostico" class="form-label">Diagnóstico</label>
+              <textarea class="form-control" id="diagnostico" formControlName="diagnostico" rows="3"></textarea>
+              <div class="invalid-feedback" *ngIf="form.get('diagnostico')?.invalid && form.get('diagnostico')?.touched">
+                Diagnóstico é obrigatório
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="prescricao" class="form-label">Prescrição</label>
+              <textarea class="form-control" id="prescricao" formControlName="prescricao" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="observacoes" class="form-label">Observações</label>
+              <textarea class="form-control" id="observacoes" formControlName="observacoes" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="nomeMedico" class="form-label">Nome do Médico</label>
+              <input type="text" class="form-control" id="nomeMedico" formControlName="nomeMedico">
+              <div class="invalid-feedback" *ngIf="form.get('nomeMedico')?.invalid && form.get('nomeMedico')?.touched">
+                Nome do médico é obrigatório
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="crmMedico" class="form-label">CRM do Médico</label>
+              <input type="text" class="form-control" id="crmMedico" formControlName="crmMedico">
+              <div class="invalid-feedback" *ngIf="form.get('crmMedico')?.invalid && form.get('crmMedico')?.touched">
+                CRM do médico é obrigatório
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="queixaPrincipal" class="form-label">Queixa Principal</label>
+              <textarea class="form-control" id="queixaPrincipal" formControlName="queixaPrincipal" rows="3"></textarea>
+              <div class="invalid-feedback" *ngIf="form.get('queixaPrincipal')?.invalid && form.get('queixaPrincipal')?.touched">
+                Queixa principal é obrigatória
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="historicoProcedimentosEsteticos" class="form-label">Histórico de Procedimentos Estéticos</label>
+              <textarea class="form-control" id="historicoProcedimentosEsteticos" formControlName="historicoProcedimentosEsteticos" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="usoMedicamentosSuplementos" class="form-label">Uso de Medicamentos ou Suplementos</label>
+              <textarea class="form-control" id="usoMedicamentosSuplementos" formControlName="usoMedicamentosSuplementos" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="alergias" class="form-label">Alergias</label>
+              <textarea class="form-control" id="alergias" formControlName="alergias" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="condicoesSaudePreExistentes" class="form-label">Condições de Saúde Pré-existentes</label>
+              <textarea class="form-control" id="condicoesSaudePreExistentes" formControlName="condicoesSaudePreExistentes" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="expectativasPreferencias" class="form-label">Expectativas e Preferências</label>
+              <textarea class="form-control" id="expectativasPreferencias" formControlName="expectativasPreferencias" rows="3"></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || loading">
+                {{ isEdit ? 'Atualizar' : 'Salvar' }} Prontuário
+              </button>
+              <button type="button" class="btn btn-secondary" routerLink="/prontuarios">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

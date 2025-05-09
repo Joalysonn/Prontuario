@@ -1,0 +1,37 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "postgres",
+      "image": "postgres:15",
+      "environment": [
+        {"name": "POSTGRES_USER", "value": "meuuser"},
+        {"name": "POSTGRES_PASSWORD", "value": "minhasenha"},
+        {"name": "POSTGRES_DB", "value": "meubanco"}
+      ],
+      "essential": true,
+      "memory": 256
+    },
+    {
+      "name": "backend",
+      "image": "sua-conta-id.dkr.ecr.sua-regiao.amazonaws.com/backend:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [{"hostPort": 8080, "containerPort": 8080}],
+      "links": ["postgres"],
+      "environment": [
+        {"name": "SPRING_DATASOURCE_URL", "value": "jdbc:postgresql://postgres:5432/meubanco"},
+        {"name": "SPRING_DATASOURCE_USERNAME", "value": "meuuser"},
+        {"name": "SPRING_DATASOURCE_PASSWORD", "value": "minhasenha"}
+      ]
+    },
+    {
+      "name": "frontend",
+      "image": "sua-conta-id.dkr.ecr.sua-regiao.amazonaws.com/frontend:latest",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [{"hostPort": 80, "containerPort": 80}],
+      "links": ["backend"]
+    }
+  ]
+}

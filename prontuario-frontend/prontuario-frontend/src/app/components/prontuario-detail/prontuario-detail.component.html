@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2>Detalhes do Prontuário</h2>
+          <div>
+            <button class="btn btn-primary me-2" (click)="exportarPdf()" [disabled]="loading">
+              <i class="bi bi-file-pdf"></i> Exportar PDF
+            </button>
+            <button class="btn btn-secondary" routerLink="/prontuarios">Voltar</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div *ngIf="loading" class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Carregando...</span>
+            </div>
+          </div>
+
+          <div *ngIf="error" class="alert alert-danger">
+            {{ error }}
+          </div>
+
+          <div *ngIf="!loading && !error && prontuario" class="prontuario-details">
+            <h3 class="mb-4">Dados do Paciente</h3>
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <p><strong>Nome:</strong> {{ prontuario.paciente?.nome }}</p>
+                <p><strong>CPF:</strong> {{ prontuario.paciente?.cpf }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Data de Nascimento:</strong> {{ prontuario.paciente?.dataNascimento | date:'dd/MM/yyyy' }}</p>
+                <p><strong>Telefone:</strong> {{ prontuario.paciente?.telefone }}</p>
+              </div>
+            </div>
+
+            <h3 class="mb-4">Dados da Consulta</h3>
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <p><strong>Data da Consulta:</strong> {{ prontuario.dataConsulta | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p><strong>Médico:</strong> {{ prontuario.nomeMedico }}</p>
+                <p><strong>CRM:</strong> {{ prontuario.crmMedico }}</p>
+              </div>
+            </div>
+
+            <h3 class="mb-4">Informações Clínicas</h3>
+            <div class="row mb-4">
+              <div class="col-12">
+                <p><strong>Queixa Principal:</strong> {{ prontuario.queixaPrincipal }}</p>
+                <p><strong>Sintomas:</strong> {{ prontuario.sintomas }}</p>
+                <p><strong>Diagnóstico:</strong> {{ prontuario.diagnostico }}</p>
+                <p><strong>Prescrição:</strong> {{ prontuario.prescricao }}</p>
+                <p><strong>Histórico de Procedimentos:</strong> {{ prontuario.historicoProcedimentosEsteticos }}</p>
+                <p><strong>Medicamentos/Suplementos:</strong> {{ prontuario.usoMedicamentosSuplementos }}</p>
+                <p><strong>Alergias:</strong> {{ prontuario.alergias }}</p>
+                <p><strong>Condições Pré-existentes:</strong> {{ prontuario.condicoesSaudePreExistentes }}</p>
+                <p><strong>Expectativas:</strong> {{ prontuario.expectativasPreferencias }}</p>
+                <p><strong>Observações:</strong> {{ prontuario.observacoes }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
